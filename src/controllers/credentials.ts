@@ -29,7 +29,9 @@ class CredentialsController {
   }
 
   async configureCredentials() {
-    const { username, password } = await inquirer.prompt(credentialsQuestions);
+    const { username, password } = await inquirer.prompt<Credentials>(
+      credentialsQuestions
+    );
 
     await this.saveCredentials({ username, password });
   }

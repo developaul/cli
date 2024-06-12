@@ -1,9 +1,11 @@
 import type { QuestionCollection } from "inquirer";
 
-import { credentialsController } from "@/controllers";
+import { credentialsController, stageController } from "@/controllers";
 import { initialOptions } from "@/interfaces";
 
 export const getInitialQuestions = (): QuestionCollection => {
+  const disabled = !credentialsController.isValidCredentials();
+
   return [
     {
       type: "list",
@@ -17,7 +19,12 @@ export const getInitialQuestions = (): QuestionCollection => {
         {
           name: "List credentials",
           value: initialOptions.List,
-          disabled: !credentialsController.isValidCredentials(),
+          disabled,
+        },
+        {
+          name: "Import credentials",
+          value: initialOptions.Import,
+          disabled,
         },
       ],
     },
@@ -36,3 +43,22 @@ export const credentialsQuestions = [
     message: "Password",
   },
 ];
+
+export const getImportEnviromentsQuestions = (): QuestionCollection => {
+  const choices = stageController.getStages();
+
+  return [
+    {
+      type: "input",
+      name: "filePath",
+      message: "Enter the source file path:",
+      default: ".",
+    },
+    {
+      type: "list",
+      name: "stage",
+      message: "Select the stage to import into:",
+      choices,
+    },
+  ];
+};
