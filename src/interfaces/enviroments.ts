@@ -3,3 +3,10 @@ export interface ImportEnviromentsArgs {
   stage: string;
   project: string;
 }
+
+export interface AddEnviromentArgs {
+  name: string;
+  value: string;
+  stage: string;
+  project: string;
+}

@@ -11,9 +11,15 @@ const main = async () => {
     case initialOptions.ConfigureCredentials:
       credentialsController.configureCredentials();
       break;
+
     case initialOptions.ListCredentials:
       credentialsController.listCredentials();
       break;
+
+    case initialOptions.AddEnviroment:
+      enviromentController.addEnviroment();
+      break;
+
     case initialOptions.ImportEnviroments:
       enviromentController.importEnviroments();
       break;

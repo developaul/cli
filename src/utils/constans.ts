@@ -26,6 +26,11 @@ export const getInitialQuestions = (): QuestionCollection => {
           disabled,
         },
         {
+          name: "Add environment",
+          value: initialOptions.AddEnviroment,
+          disabled,
+        },
+        {
           name: "Import environments",
           value: initialOptions.ImportEnviroments,
           disabled,
@@ -64,6 +69,36 @@ export const getImportEnviromentsQuestions = (): QuestionCollection => {
       name: "project",
       message: "Select the project to import:",
       choices: projects,
+    },
+    {
+      type: "list",
+      name: "stage",
+      message: "Select the stage to import:",
+      choices: stages,
+    },
+  ];
+};
+
+export const getAddEnviromentQuestions = (): QuestionCollection => {
+  const stages = stageController.getStages();
+  const projects = projectController.getProjects();
+
+  return [
+    {
+      type: "list",
+      name: "project",
+      message: "Select the project to import:",
+      choices: projects,
+    },
+    {
+      type: "input",
+      name: "name",
+      message: "Enter the name of the environment:",
+    },
+    {
+      type: "input",
+      name: "value",
+      message: "Enter the value of the environment:",
     },
     {
       type: "list",
