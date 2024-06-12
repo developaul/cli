@@ -1,6 +1,10 @@
 import type { QuestionCollection } from "inquirer";
 
-import { credentialsController, stageController } from "@/controllers";
+import {
+  credentialsController,
+  projectController,
+  stageController,
+} from "@/controllers";
 import { initialOptions } from "@/interfaces";
 
 export const getInitialQuestions = (): QuestionCollection => {
@@ -14,16 +18,16 @@ export const getInitialQuestions = (): QuestionCollection => {
       choices: [
         {
           name: "Configure credentials",
-          value: initialOptions.Configure,
+          value: initialOptions.ConfigureCredentials,
         },
         {
           name: "List credentials",
-          value: initialOptions.List,
+          value: initialOptions.ListCredentials,
           disabled,
         },
         {
-          name: "Import credentials",
-          value: initialOptions.Import,
+          name: "Import environments",
+          value: initialOptions.ImportEnviroments,
           disabled,
         },
       ],
@@ -45,7 +49,8 @@ export const credentialsQuestions = [
 ];
 
 export const getImportEnviromentsQuestions = (): QuestionCollection => {
-  const choices = stageController.getStages();
+  const stages = stageController.getStages();
+  const projects = projectController.getProjects();
 
   return [
     {
@@ -56,9 +61,15 @@ export const getImportEnviromentsQuestions = (): QuestionCollection => {
     },
     {
       type: "list",
+      name: "project",
+      message: "Select the project to import:",
+      choices: projects,
+    },
+    {
+      type: "list",
       name: "stage",
-      message: "Select the stage to import into:",
-      choices,
+      message: "Select the stage to import:",
+      choices: stages,
     },
   ];
 };

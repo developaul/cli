@@ -8,13 +8,13 @@ const main = async () => {
   const { command } = await inquirer.prompt(getInitialQuestions());
 
   switch (command) {
-    case initialOptions.Configure:
+    case initialOptions.ConfigureCredentials:
       credentialsController.configureCredentials();
       break;
-    case initialOptions.List:
+    case initialOptions.ListCredentials:
       credentialsController.listCredentials();
       break;
-    case initialOptions.Import:
+    case initialOptions.ImportEnviroments:
       enviromentController.importEnviroments();
       break;
 
