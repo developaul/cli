@@ -1,9 +1,12 @@
 {
-  "name": "dev-env-cli",
+  "name": "guardix-cli",
   "module": "index.ts",
   "devDependencies": {
     "@types/bun": "latest",
     "@types/inquirer": "^9.0.7"
+  },
+  "bin": {
+    "guardix": "./index.ts"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

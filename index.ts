@@ -1,3 +1,5 @@
+#! /usr/bin/env bun
+
 import inquirer from "inquirer";
 
 import { getInitialQuestions } from "@/utils";
