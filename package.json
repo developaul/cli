@@ -1,5 +1,5 @@
 {
-  "name": "guardix-cli",
+  "name": "guardix",
   "module": "index.ts",
   "devDependencies": {
     "@types/bun": "latest",
