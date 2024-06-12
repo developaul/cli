@@ -1,7 +1,7 @@
 import inquirer from "inquirer";
 
 import { initialQuestions } from "@/utils";
-import { inquirerController } from "@/controllers";
+import { credentialsController } from "@/controllers";
 import { initialOptions } from "@/interfaces";
 
 const main = async () => {
@@ -9,10 +9,10 @@ const main = async () => {
 
   switch (command) {
     case initialOptions.Configure:
-      inquirerController.configureCredentials();
+      credentialsController.configureCredentials();
       break;
     case initialOptions.List:
-      inquirerController.listCredentials();
+      credentialsController.listCredentials();
       break;
     default:
       console.warn("Invalid command");

@@ -17,3 +17,16 @@ export const initialQuestions = [
     ],
   },
 ];
+
+export const credentialsQuestions = [
+  {
+    type: "input",
+    name: "username",
+    message: "Username",
+  },
+  {
+    type: "password",
+    name: "password",
+    message: "Password",
+  },
+];

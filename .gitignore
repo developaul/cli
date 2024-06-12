@@ -10,6 +10,10 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
+
+# Credentials
+credentials.json
+
 # Caches
 
 .cache
@@ -173,3 +177,4 @@ dist
 
 # Finder (MacOS) folder config
 .DS_Store
+
