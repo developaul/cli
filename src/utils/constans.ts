@@ -1,22 +1,28 @@
+import type { QuestionCollection } from "inquirer";
+
+import { credentialsController } from "@/controllers";
 import { initialOptions } from "@/interfaces";
 
-export const initialQuestions = [
-  {
-    type: "list",
-    name: "command",
-    message: "What would you like to do?",
-    choices: [
-      {
-        name: "Configure credentials",
-        value: initialOptions.Configure,
-      },
-      {
-        name: "List credentials",
-        value: initialOptions.List,
-      },
-    ],
-  },
-];
+export const getInitialQuestions = (): QuestionCollection => {
+  return [
+    {
+      type: "list",
+      name: "command",
+      message: "What would you like to do?",
+      choices: [
+        {
+          name: "Configure credentials",
+          value: initialOptions.Configure,
+        },
+        {
+          name: "List credentials",
+          value: initialOptions.List,
+          disabled: !credentialsController.isValidCredentials(),
+        },
+      ],
+    },
+  ];
+};
 
 export const credentialsQuestions = [
   {

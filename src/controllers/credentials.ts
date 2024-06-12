@@ -39,6 +39,12 @@ class CredentialsController {
 
     console.table(credentials);
   }
+
+  async isValidCredentials() {
+    const credentials = await this.loadCredentials();
+
+    return credentials !== null;
+  }
 }
 
 export const credentialsController = new CredentialsController();
