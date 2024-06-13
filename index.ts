@@ -22,6 +22,10 @@ const main = async () => {
       enviromentController.addEnviroment();
       break;
 
+    case initialOptions.RemoveEnviroment:
+      enviromentController.removeEnviroment();
+      break;
+
     case initialOptions.ImportEnviroments:
       enviromentController.importEnviroments();
       break;

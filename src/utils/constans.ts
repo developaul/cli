@@ -39,6 +39,11 @@ export const getInitialQuestions = (): QuestionCollection => {
           disabled,
         },
         {
+          name: "Remove environment",
+          value: initialOptions.RemoveEnviroment,
+          disabled,
+        },
+        {
           name: "Import environments",
           value: initialOptions.ImportEnviroments,
           disabled,
@@ -113,6 +118,31 @@ export const getAddEnviromentQuestions = (): QuestionCollection => {
       name: "stage",
       message: "Select the stage to import:",
       choices: stages,
+    },
+  ];
+};
+
+export const getRemoveEnviromentQuestions = (): QuestionCollection => {
+  const stages = stageController.getStages();
+  const projects = projectController.getProjects();
+
+  return [
+    {
+      type: "list",
+      name: "project",
+      message: "Select the project to import:",
+      choices: projects,
+    },
+    {
+      type: "list",
+      name: "stage",
+      message: "Select the stage to import:",
+      choices: stages,
+    },
+    {
+      type: "input",
+      name: "name",
+      message: "Enter the variable name to remove:",
     },
   ];
 };

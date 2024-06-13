@@ -10,3 +10,9 @@ export interface AddEnviromentArgs {
   stage: string;
   project: string;
 }
+
+export interface RemoveEnviromentArgs {
+  name: string;
+  stage: string;
+  project: string;
+}
