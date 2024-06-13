@@ -1,15 +1,10 @@
-import type { Credentials } from "@/interfaces";
+import type { Credentials, Enviroment } from "@/interfaces";
 import DataSource from "./DataSource";
 import { baseConfig } from "@/utils";
 
 interface GetEnviromentsArgs {
   project: string;
   stage: string;
-}
-
-interface Enviroment {
-  key: string;
-  value: string;
 }
 
 class EnviromentsAPI extends DataSource {

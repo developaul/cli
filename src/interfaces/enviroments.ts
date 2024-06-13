@@ -16,3 +16,8 @@ export interface RemoveEnviromentArgs {
   stage: string;
   project: string;
 }
+
+export interface Enviroment {
+  key: string;
+  value: string;
+}

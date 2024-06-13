@@ -1,50 +1,33 @@
 import inquirer from "inquirer";
-import * as fs from "fs";
 
 import {
   getAddEnviromentQuestions,
-  getImportEnviromentsQuestions,
   getRemoveEnviromentQuestions,
 } from "@/utils";
 import type {
   AddEnviromentArgs,
-  ImportEnviromentsArgs,
+  IContext,
   RemoveEnviromentArgs,
 } from "@/interfaces";
-import { EnviromentsAPI } from "@/services";
-import { credentialsController } from "./credentials";
+import { fileSystemController } from "./fileSystem";
+import { inquirerController } from "./inquirer";
 
 class EnviromentsController {
   async getStages() {}
 
-  async importEnviroments() {
-    // TODO: Call inquirer controller
-    const enviromentsQuestions = getImportEnviromentsQuestions();
-
+  async importEnviroments(context: IContext) {
     const { filePath, stage, project } =
-      await inquirer.prompt<ImportEnviromentsArgs>(enviromentsQuestions);
+      await inquirerController.getImportEnviromentsAnswers();
 
-    // MANTENER ESTO
-    const credentials = credentialsController.getCredentials();
-
-    if (!credentials) {
-      throw new Error("Credentials not found");
-    }
-
-    const enviromentsAPI = new EnviromentsAPI(credentials);
-
-    const variables = await enviromentsAPI.getEnviroments({
+    const variables = await context.dataSource.enviromentsAPI.getEnviroments({
       project,
       stage,
     });
-    // HASTA AQUI
 
-    // TODO: Call Fs controller
-    const envFileContent = variables
-      .map(({ key, value }) => `${key}=${value}`)
-      .join("\n");
-
-    fs.writeFileSync(`${filePath}/.env`, envFileContent);
+    fileSystemController.createFile({
+      filePath,
+      variables,
+    });
   }
 
   async addEnviroment() {

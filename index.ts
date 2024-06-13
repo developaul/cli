@@ -5,9 +5,12 @@ import inquirer from "inquirer";
 import { getInitialQuestions } from "@/utils";
 import { credentialsController, enviromentController } from "@/controllers";
 import { initialOptions } from "@/interfaces";
+import { getContext } from "@/middlewares";
 
 const main = async () => {
   const { command } = await inquirer.prompt(getInitialQuestions());
+
+  const context = getContext();
 
   switch (command) {
     case initialOptions.ConfigureCredentials:
@@ -27,7 +30,7 @@ const main = async () => {
       break;
 
     case initialOptions.ImportEnviroments:
-      enviromentController.importEnviroments();
+      enviromentController.importEnviroments(context);
       break;
 
     default:
