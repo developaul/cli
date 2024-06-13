@@ -19,6 +19,7 @@
   },
   "type": "module",
   "dependencies": {
+    "axios": "^1.7.2",
     "inquirer": "^9.2.23"
   },
   "author": {

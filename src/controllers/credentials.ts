@@ -29,7 +29,7 @@ class CredentialsController {
     fs.writeFileSync(configFilePath, credentialsJson, "utf-8");
   }
 
-  loadCredentials(): Credentials | null {
+  getCredentials(): Credentials | null {
     try {
       const credentialsJson = fs.readFileSync(configFilePath, "utf-8");
 
@@ -48,13 +48,13 @@ class CredentialsController {
   }
 
   async listCredentials() {
-    const credentials = this.loadCredentials();
+    const credentials = this.getCredentials();
 
     console.table(credentials);
   }
 
   hasValidCredentials(): boolean {
-    const credentials = this.loadCredentials();
+    const credentials = this.getCredentials();
 
     return credentials !== null;
   }

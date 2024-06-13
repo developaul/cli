@@ -11,23 +11,40 @@ import type {
   ImportEnviromentsArgs,
   RemoveEnviromentArgs,
 } from "@/interfaces";
+import { EnviromentsAPI } from "@/services";
+import { credentialsController } from "./credentials";
 
 class EnviromentsController {
   async getStages() {}
 
   async importEnviroments() {
+    // TODO: Call inquirer controller
     const enviromentsQuestions = getImportEnviromentsQuestions();
 
     const { filePath, stage, project } =
       await inquirer.prompt<ImportEnviromentsArgs>(enviromentsQuestions);
 
-    console.log({ filePath, stage, project });
+    // MANTENER ESTO
+    const credentials = credentialsController.getCredentials();
 
-    // TODO: CALL API SERVICE HERE BY STAGE AND PROJECT AND TOKEN
-    const variables =
-      "OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+    if (!credentials) {
+      throw new Error("Credentials not found");
+    }
 
-    fs.writeFileSync(`${filePath}/.env`, variables);
+    const enviromentsAPI = new EnviromentsAPI(credentials);
+
+    const variables = await enviromentsAPI.getEnviroments({
+      project,
+      stage,
+    });
+    // HASTA AQUI
+
+    // TODO: Call Fs controller
+    const envFileContent = variables
+      .map(({ key, value }) => `${key}=${value}`)
+      .join("\n");
+
+    fs.writeFileSync(`${filePath}/.env`, envFileContent);
   }
 
   async addEnviroment() {
