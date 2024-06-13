@@ -1,21 +1,28 @@
 {
   "name": "guardix",
+  "description": "CLI tool to manage environment variables",
   "module": "index.ts",
   "devDependencies": {
     "@types/bun": "latest",
     "@types/inquirer": "^9.0.7"
   },
+  "license": "MIT",
   "bin": {
-    "guardix": "./index.ts"
+    "guardix": "index.ts"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "dev": "bun index.ts"
+    "dev": "bun index.ts",
+    "publish": "npm publish"
   },
   "type": "module",
   "dependencies": {
     "inquirer": "^9.2.23"
-  }
+  },
+  "author": {
+    "name": "Developaul"
+  },
+  "version": "1.0.1"
 }

@@ -1,3 +1,5 @@
+import * as path from "path";
+import * as os from "os";
 import type { QuestionCollection } from "inquirer";
 
 import {
@@ -7,8 +9,14 @@ import {
 } from "@/controllers";
 import { initialOptions } from "@/interfaces";
 
+export const configFilePath = path.join(
+  os.homedir(),
+  ".guardix",
+  "config.json"
+);
+
 export const getInitialQuestions = (): QuestionCollection => {
-  const disabled = !credentialsController.isValidCredentials();
+  const disabled = !credentialsController.hasValidCredentials();
 
   return [
     {

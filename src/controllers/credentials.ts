@@ -1,6 +1,7 @@
 import * as fs from "fs";
+import * as path from "path";
 import inquirer from "inquirer";
-import { credentialsQuestions } from "@/utils";
+import { configFilePath, credentialsQuestions } from "@/utils";
 import type { Credentials } from "@/interfaces";
 
 class CredentialsController {
@@ -19,13 +20,23 @@ class CredentialsController {
       2
     );
 
-    fs.writeFileSync("./credentials.json", credentialsJson, "utf-8");
+    const configDir = path.dirname(configFilePath);
+
+    if (!fs.existsSync(configDir)) {
+      fs.mkdirSync(configDir, { recursive: true });
+    }
+
+    fs.writeFileSync(configFilePath, credentialsJson, "utf-8");
   }
 
-  async loadCredentials() {
-    const credentialsJson = fs.readFileSync("./credentials.json", "utf-8");
+  loadCredentials(): Credentials | null {
+    try {
+      const credentialsJson = fs.readFileSync(configFilePath, "utf-8");
 
-    return JSON.parse(credentialsJson);
+      return JSON.parse(credentialsJson);
+    } catch (error) {
+      return null;
+    }
   }
 
   async configureCredentials() {
@@ -37,13 +48,13 @@ class CredentialsController {
   }
 
   async listCredentials() {
-    const credentials = await this.loadCredentials();
+    const credentials = this.loadCredentials();
 
     console.table(credentials);
   }
 
-  async isValidCredentials() {
-    const credentials = await this.loadCredentials();
+  hasValidCredentials(): boolean {
+    const credentials = this.loadCredentials();
 
     return credentials !== null;
   }
