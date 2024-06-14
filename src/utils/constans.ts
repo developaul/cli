@@ -33,16 +33,16 @@ export const getInitialQuestions = (): QuestionCollection => {
           value: initialOptions.ListCredentials,
           disabled,
         },
-        {
-          name: "Add environment",
-          value: initialOptions.AddEnviroment,
-          disabled,
-        },
-        {
-          name: "Remove environment",
-          value: initialOptions.RemoveEnviroment,
-          disabled,
-        },
+        // {
+        //   name: "Add environment",
+        //   value: initialOptions.AddEnviroment,
+        //   disabled,
+        // },
+        // {
+        //   name: "Remove environment",
+        //   value: initialOptions.RemoveEnviroment,
+        //   disabled,
+        // },
         {
           name: "Import environments",
           value: initialOptions.ImportEnviroments,
