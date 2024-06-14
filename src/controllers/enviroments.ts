@@ -1,20 +1,11 @@
 import inquirer from "inquirer";
 
-import {
-  getAddEnviromentQuestions,
-  getRemoveEnviromentQuestions,
-} from "@/utils";
-import type {
-  AddEnviromentArgs,
-  IContext,
-  RemoveEnviromentArgs,
-} from "@/interfaces";
+import { getRemoveEnviromentQuestions } from "@/utils";
+import type { IContext, RemoveEnviromentArgs } from "@/interfaces";
 import { fileSystemController } from "./fileSystem";
 import { inquirerController } from "./inquirer";
 
 class EnviromentsController {
-  async getStages() {}
-
   async importEnviroments(context: IContext) {
     const { filePath, stage, project } =
       await inquirerController.getImportEnviromentsAnswers();
@@ -30,15 +21,10 @@ class EnviromentsController {
     });
   }
 
-  async addEnviroment() {
-    const enviromentsQuestions = getAddEnviromentQuestions();
+  async addEnviroment(context: IContext) {
+    const answers = await inquirerController.getAddEnviromentAnswers();
 
-    const { name, value, stage, project } =
-      await inquirer.prompt<AddEnviromentArgs>(enviromentsQuestions);
-
-    console.log({ name, value, stage, project });
-
-    // TODO: CALL API SERVICE TO SAVE ENVIRONMENT
+    await context.dataSource.enviromentsAPI.addEnviroment(answers);
   }
 
   async removeEnviroment() {

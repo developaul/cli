@@ -22,7 +22,7 @@ const main = async () => {
       break;
 
     case initialOptions.AddEnviroment:
-      enviromentController.addEnviroment();
+      enviromentController.addEnviroment(context);
       break;
 
     case initialOptions.RemoveEnviroment:

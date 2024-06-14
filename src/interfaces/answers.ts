@@ -3,3 +3,10 @@ export interface ImportEnviromentsAnswers {
   stage: string;
   project: string;
 }
+
+export interface AddEnviromentAnswers {
+  name: string;
+  value: string;
+  stage: string;
+  project: string;
+}
