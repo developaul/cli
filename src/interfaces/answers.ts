@@ -10,3 +10,9 @@ export interface AddEnviromentAnswers {
   stage: string;
   project: string;
 }
+
+export interface RemoveEnviromentAnswers {
+  name: string;
+  stage: string;
+  project: string;
+}

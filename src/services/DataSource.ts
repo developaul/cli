@@ -33,8 +33,8 @@ class DataSource {
     return data;
   }
 
-  async delete<T>(path: string, params: any): Promise<T> {
-    const { data } = await this.instance.delete(path, { params });
+  async delete<T>(path: string, params?: any): Promise<T> {
+    const { data } = await this.instance.delete(path, params);
 
     return data;
   }

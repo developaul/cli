@@ -1,7 +1,4 @@
-import inquirer from "inquirer";
-
-import { getRemoveEnviromentQuestions } from "@/utils";
-import type { IContext, RemoveEnviromentArgs } from "@/interfaces";
+import type { IContext } from "@/interfaces";
 import { fileSystemController } from "./fileSystem";
 import { inquirerController } from "./inquirer";
 
@@ -27,15 +24,10 @@ class EnviromentsController {
     await context.dataSource.enviromentsAPI.addEnviroment(answers);
   }
 
-  async removeEnviroment() {
-    const enviromentsQuestions = getRemoveEnviromentQuestions();
+  async removeEnviroment(context: IContext) {
+    const answers = await inquirerController.getRemoveEnviromentAnswers();
 
-    const { name, stage, project } =
-      await inquirer.prompt<RemoveEnviromentArgs>(enviromentsQuestions);
-
-    console.log({ name, stage, project });
-
-    // TODO: CALL API SERVICE TO REMOVE ENVIRONMENT
+    await context.dataSource.enviromentsAPI.removeEnviroment(answers);
   }
 }
 

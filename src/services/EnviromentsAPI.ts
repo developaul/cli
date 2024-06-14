@@ -3,6 +3,7 @@ import type {
   Credentials,
   Enviroment,
   ImportEnviromentsAnswers,
+  RemoveEnviromentAnswers,
 } from "@/interfaces";
 import DataSource from "./DataSource";
 import { baseConfig } from "@/utils";
@@ -29,6 +30,16 @@ class EnviromentsAPI extends DataSource {
 
   addEnviroment(args: AddEnviromentAnswers) {
     return this.post<Enviroment>(`/enviroments`, args);
+  }
+
+  removeEnviroment(args: RemoveEnviromentAnswers) {
+    const { name, stage, project } = args;
+
+    const searchParams = new URLSearchParams({ name, stage, project });
+
+    const searchParamsString = searchParams.toString();
+
+    return this.delete<Enviroment>(`/enviroments/${searchParamsString}`);
   }
 }
 

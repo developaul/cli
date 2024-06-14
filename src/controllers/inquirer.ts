@@ -2,10 +2,12 @@ import inquirer from "inquirer";
 import {
   getAddEnviromentQuestions,
   getImportEnviromentsQuestions,
+  getRemoveEnviromentQuestions,
 } from "@/utils";
 import type {
   AddEnviromentAnswers,
   ImportEnviromentsAnswers,
+  RemoveEnviromentAnswers,
 } from "@/interfaces";
 
 class InquirerController {
@@ -19,6 +21,12 @@ class InquirerController {
     const enviromentsQuestions = getAddEnviromentQuestions();
 
     return inquirer.prompt<AddEnviromentAnswers>(enviromentsQuestions);
+  }
+
+  getRemoveEnviromentAnswers(): Promise<RemoveEnviromentAnswers> {
+    const enviromentsQuestions = getRemoveEnviromentQuestions();
+
+    return inquirer.prompt<RemoveEnviromentAnswers>(enviromentsQuestions);
   }
 }
 

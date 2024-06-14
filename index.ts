@@ -26,7 +26,7 @@ const main = async () => {
       break;
 
     case initialOptions.RemoveEnviroment:
-      enviromentController.removeEnviroment();
+      enviromentController.removeEnviroment(context);
       break;
 
     case initialOptions.ImportEnviroments:
